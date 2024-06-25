@@ -1,0 +1,14 @@
+# Rhistory
+.Rhistory
+
+# Rdata files
+*.RData
+
+# rds files
+*.rds
+
+# sav files
+*.sav
+
+# sav files
+*.dta
