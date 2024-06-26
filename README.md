@@ -22,9 +22,15 @@ The data used for analysis is available on reasonable request from the [**Study 
 
 - **Data used for analysis:** `clean_supermarket_a.RData`
 
--  Transactional data with 47,748,603 records from January 2022 to December 2023 of individuals who have made purchases in a tier 2 supermarket with 10 branches spread across 5 Kenyan counties (Nakuru, Kajiado, Nairobi, Kirinyaga and Machakos)
-
 - Data anonymized at supermarket and client level
+
+-  Transactional data with 47,748,603 records from January 2022 to December 2023 of individuals who have made purchases in a tier 2 supermarket with 10 branches spread across 5 Kenyan counties (Nakuru, Kajiado, Nairobi, Kirinyaga and Machakos).
+
+- Transactional data further filtered by removing non-food items and non-loyalty card shoppers. The final dataset for analysis had 15,210,101 records.
+
+- Demographic characteristics of loyalty individuals includes gender, age and location (Counties).
+
+- Food items categorized into 103 food categories which were further classified into 4 groups according to the Nova food classification.
 
  
 ## Run
