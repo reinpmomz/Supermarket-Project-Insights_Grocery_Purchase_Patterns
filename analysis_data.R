@@ -7,15 +7,14 @@ working_directory
 ## dataset with variables for descriptive and inferential statistics
 
 ### loyalty customers data for food items
-df_loyalty <- df_clean %>%
-  dplyr::filter(customer_type == "Loyalty", item_type == "Food Item") %>%
+df_loyalty <- df_clean_a %>%
+  dplyr::filter(customer_type == "Loyalty card") %>%
   tidyr::drop_na(id) %>%
   dplyr::select(id, gender, description, price, quantity, quantity_new, total, total_new, trnref, transaction_id, sdatetime, 
                 paymentmode, branch, branch_name, customer_type, month_date, month_name, year, quarter_date, age, age_group,
                 county_name, sub_county_name, supermarket_name, item_type, class_name, subclass_name, nova, standard_uom,
-                quantity_uom, price_uom
-                ) %>%
-  dplyr::mutate(class_name_uom = paste0(class_name, " (", standard_uom, ")"))
+                quantity_uom, price_uom, class_name_uom
+                ) 
 
 ### unique id for loyalty customers
 df_loyalty_customer_id <- df_loyalty %>%

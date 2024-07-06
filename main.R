@@ -28,6 +28,12 @@ source("helperfuns_plots_4.R")
 ### process flowchart
 source("flowchart.R")
 
+#df_clean_supermarket_a <- readRDS("df_raw_a.rds")
+
+#df_clean_a <- readRDS("df_clean_a.rds")
+
+#df_loyalty <- readRDS("df_loyalty.rds")
+
 #df_loyalty_analysis <- readRDS("df_loyalty_analysis.rds")
 
 #df_loyalty_analysis_nova <- readRDS("df_loyalty_analysis_nova.rds")
@@ -170,6 +176,8 @@ save(list = ls(all.names = TRUE, pattern = "*_classname_rules"),
      envir = .GlobalEnv #parent.frame()
      )
 
+#saveRDS(df_clean_supermarket_a, file = "df_raw_a.rds")
+#saveRDS(df_clean_a, file = "df_clean_a.rds")
 #saveRDS(df_loyalty, file = "df_loyalty.rds")
 #saveRDS(df_loyalty_analysis, file = "df_loyalty_analysis.rds")
 #saveRDS(df_loyalty_analysis_nova, file = "df_loyalty_analysis_nova.rds")

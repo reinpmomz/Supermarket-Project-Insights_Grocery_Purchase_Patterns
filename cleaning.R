@@ -32,7 +32,7 @@ unique_items_vars_df <- recode_file[["unique_items"]] %>%
                    by = c("uom_criteria")
                    )
 
-df_clean <- df_clean_supermarket_a %>%
+df_clean_a <- df_clean_supermarket_a %>%
   dplyr::mutate(price = if_else(price == 0, NA, price) #Replacing price 0 with NA
                 , sdatetime = as.Date(sdatetime) #format doesn't store any time information
                 , month_date = lubridate::floor_date(sdatetime, unit = "month")
@@ -44,7 +44,8 @@ df_clean <- df_clean_supermarket_a %>%
   dplyr::ungroup() %>%
   dplyr::mutate( total_new = price*quantity
                  , quantity_new = if_else((quantity %% 1) > 0, 1, quantity) #modulo operator with decimal numbers
-                 , customer_type = if_else(!is.na(id) | paymentmode == "Loyalty Redemption", "Loyalty", "Non-Loyalty")
+                 , price_new = total_new/quantity_new
+                 , customer_type = if_else(!is.na(id) | paymentmode == "Loyalty Redemption", "Loyalty card", "No-Loyalty card")
                  , month_name = lubridate::month(sdatetime,  label = TRUE, abbr = FALSE)
                  , year = lubridate::year(sdatetime)
                  , quarter_date = as.factor(lubridate::quarter(sdatetime, type = "year.quarter"))
@@ -65,8 +66,9 @@ df_clean <- df_clean_supermarket_a %>%
                                        )
                 , price_uom = total_new/quantity_uom
                 , across(c(price_uom), ~replace(.x, is.nan(.x), 0))
+                , class_name_uom = paste0(class_name, " (", standard_uom, ")")
                 ) %>%
-  dplyr::filter(quantity > 0) %>% 
+  dplyr::filter(quantity > 0, item_type == "Food Item") %>%
   labelled::set_variable_labels(!!!new_labels[names(new_labels) %in% names(.)] #labeling variables from named vector
                                 )
 
