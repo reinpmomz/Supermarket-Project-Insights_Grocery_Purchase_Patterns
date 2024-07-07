@@ -59,18 +59,6 @@ ggtheme_rank_plot <- function() {
   )
 }
 
-ggtheme_heat_plot = function(angletext_yaxis=0, angletext_xaxis=0) {
-  theme_set(theme_bw(base_size = 10)
-            + theme(panel.grid = element_blank()
-                    , plot.title = element_text(hjust = 0.5, face = "bold", size = 10)
-                    , axis.title.x = element_blank()
-                    , axis.title.y = element_blank()
-                    , axis.text.y = element_text(size = 8.5, angle = angletext_yaxis, lineheight = 0.7)
-                    , axis.text.x = element_text(size = 8.5, angle = angletext_xaxis, lineheight = 0.7)
-            )
-  )
-}
-
 ### simple Bar graphs and histograms without density plots
 single_plot <- function(df, variable, rotate_axis=FALSE, percent_yaxis=FALSE, title_label = TRUE, text_label = TRUE,
                         histogram = TRUE, text_label_size = 2.5, y_axis_breaks =10, x_axis_breaks_histogram = 10,
@@ -228,7 +216,7 @@ single_plot <- function(df, variable, rotate_axis=FALSE, percent_yaxis=FALSE, ti
 multires_stack_plot <- 
   function(df, variable, reverse_xaxis=FALSE, reverse_fill = FALSE, rotate_axis=TRUE, percent_yaxis=TRUE,
            y_axis_breaks = 10, title_label="", text_label = TRUE, text_angle = 0, text_label_size = 2.5,
-           bar_width = 0.8, legend_label = "Response", expand_yaxis = c(0.01,0.05),
+           bar_width = 0.8, legend_label = "Response", expand_yaxis = c(0.01,0.05), nrow_legend = 1,
            x_axis_label_wrap_width = 20, title_label_wrap_width = 35, percent_text_accuracy = 0.1) {
   df <- (df %>%
            dplyr::select(all_of(variable)) %>%
@@ -252,16 +240,20 @@ multires_stack_plot <-
   p <- if (reverse_xaxis == TRUE) {
     if (reverse_fill == TRUE) {
       ggplot(df, aes(x= forcats::fct_rev(name), y=count,
-                     fill=forcats::fct_rev(forcats::fct_reorder(value, count))))
+                     fill=forcats::fct_rev(forcats::fct_reorder(value, count)))) +
+        guides(fill=guide_legend(nrow = nrow_legend))
     } else {
       ggplot(df, aes(x= forcats::fct_rev(name), y=count,
-                     fill=forcats::fct_reorder(value, count)))
+                     fill=forcats::fct_reorder(value, count))) +
+        guides(fill=guide_legend(nrow = nrow_legend))
     }
   } else {
     if (reverse_fill == TRUE) {
-      ggplot(df, aes(x= name, y=count, fill=forcats::fct_rev(forcats::fct_reorder(value, count)))) 
+      ggplot(df, aes(x= name, y=count, fill=forcats::fct_rev(forcats::fct_reorder(value, count)))) +
+        guides(fill=guide_legend(nrow = nrow_legend))
     } else {
-      ggplot(df, aes(x= name, y=count, fill=forcats::fct_reorder(value, count))) 
+      ggplot(df, aes(x= name, y=count, fill=forcats::fct_reorder(value, count))) +
+        guides(fill=guide_legend(nrow = nrow_legend))
       }
   }
   
