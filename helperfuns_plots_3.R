@@ -216,7 +216,7 @@ single_plot <- function(df, variable, rotate_axis=FALSE, percent_yaxis=FALSE, ti
 multires_stack_plot <- 
   function(df, variable, reverse_xaxis=FALSE, reverse_fill = FALSE, rotate_axis=TRUE, percent_yaxis=TRUE,
            y_axis_breaks = 10, title_label="", text_label = TRUE, text_angle = 0, text_label_size = 2.5,
-           bar_width = 0.8, legend_label = "Response", expand_yaxis = c(0.01,0.05), nrow_legend = 1,
+           bar_width = 0.8, legend_label = "Response", expand_yaxis = c(0.01,0.05), nrow_legend = 1, ncol_legend = NULL,
            x_axis_label_wrap_width = 20, title_label_wrap_width = 35, percent_text_accuracy = 0.1) {
   df <- (df %>%
            dplyr::select(all_of(variable)) %>%
@@ -241,19 +241,19 @@ multires_stack_plot <-
     if (reverse_fill == TRUE) {
       ggplot(df, aes(x= forcats::fct_rev(name), y=count,
                      fill=forcats::fct_rev(forcats::fct_reorder(value, count)))) +
-        guides(fill=guide_legend(nrow = nrow_legend))
+        guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
     } else {
       ggplot(df, aes(x= forcats::fct_rev(name), y=count,
                      fill=forcats::fct_reorder(value, count))) +
-        guides(fill=guide_legend(nrow = nrow_legend))
+        guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
     }
   } else {
     if (reverse_fill == TRUE) {
       ggplot(df, aes(x= name, y=count, fill=forcats::fct_rev(forcats::fct_reorder(value, count)))) +
-        guides(fill=guide_legend(nrow = nrow_legend))
+        guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
     } else {
       ggplot(df, aes(x= name, y=count, fill=forcats::fct_reorder(value, count))) +
-        guides(fill=guide_legend(nrow = nrow_legend))
+        guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
       }
   }
   
@@ -391,7 +391,8 @@ multires_count_time_plot <-
   function(df, variable, timevars, id_vars, filter_level, time_text_xaxis = TRUE, reverse_xaxis=TRUE, rotate_axis=TRUE,
            reverse_fill = TRUE, percent_yaxis=TRUE, y_axis_breaks = 6, title_label="", text_label = TRUE,
            text_label_size = 2.5, y_axis_limits = c(NULL, NULL), percent_text_accuracy = 0.1, bar_width = 0.8,
-           expand_yaxis = c(0.01,0.06), x_axis_label_wrap_width = 20, title_label_wrap_width = 35) {
+           expand_yaxis = c(0.01,0.06), x_axis_label_wrap_width = 20, title_label_wrap_width = 35,
+           nrow_legend = 1, ncol_legend = NULL) {
     
     df <- (df %>%
              dplyr::select(all_of(c(id_vars, variable))) %>%
@@ -551,7 +552,7 @@ multires_count_time_plot <-
     p4 <- p3 +
       scale_x_discrete(labels = function(x) stringr::str_wrap(x, width = x_axis_label_wrap_width)) +
       labs(x=NULL, y=NULL, fill = NULL, title = stringr::str_wrap(title_label, width = title_label_wrap_width)) +
-      guides(fill = guide_legend(reverse = reverse_fill))
+      guides(fill = guide_legend(reverse = reverse_fill, nrow = nrow_legend, ncol = ncol_legend))
     
     print(p4)
     

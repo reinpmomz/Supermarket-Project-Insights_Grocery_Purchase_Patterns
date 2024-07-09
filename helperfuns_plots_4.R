@@ -9,7 +9,7 @@ working_directory
 
 ### stacked Bar graphs and density/box plots
 stacked_plot <- function(df, variable, fill_vars, facet_vars=NULL, facet_wrap=FALSE, title_label = TRUE, 
-                         facet_ncol = 4, rotate_axis=FALSE, box_plot=TRUE, legend=TRUE, nrow_legend = 1,
+                         facet_ncol = 4, rotate_axis=FALSE, box_plot=TRUE, legend=TRUE, nrow_legend = 1, ncol_legend = NULL,
                          y_axis_breaks = 10, expand_yaxis = c(0.01,0.05), title_label_wrap_width = 35,
                          x_axis_label_wrap_width = 10, x_axis_breaks = 10, bar_width = 0.9) {
   out <- lapply(variable, function(x){
@@ -36,7 +36,8 @@ stacked_plot <- function(df, variable, fill_vars, facet_vars=NULL, facet_wrap=FA
           p1 +
           geom_bar(aes(fill = forcats::fct_rev(forcats::fct_infreq(index_fill))), width=bar_width,
                  position="fill", stat="count", show.legend = TRUE) +
-          guides(fill=guide_legend(nrow = nrow_legend)) } else {
+          guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend)) 
+          } else {
             p1 +
               geom_bar(aes(fill = forcats::fct_rev(forcats::fct_infreq(index_fill))), width=bar_width,
                        position="fill", stat="count", show.legend = FALSE)
@@ -59,7 +60,7 @@ stacked_plot <- function(df, variable, fill_vars, facet_vars=NULL, facet_wrap=FA
               p5 +
                 geom_boxplot(aes(colour = index_fill), outlier.colour = "black", 
                              outlier.shape = 1, show.legend = TRUE) +
-                guides(colour=guide_legend(nrow = nrow_legend)) } 
+                guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend)) } 
             else {
               p5 +
                 geom_boxplot(aes(colour = index_fill), outlier.colour = "black", 
@@ -69,7 +70,7 @@ stacked_plot <- function(df, variable, fill_vars, facet_vars=NULL, facet_wrap=FA
             } else {
               ggplot(data=df, aes(x = as.numeric(index))) + 
                 geom_density(fill = index_fill, alpha=0.4, show.legend = TRUE) +
-                guides(fill=guide_legend(nrow = nrow_legend))
+                guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
               }
           p7 <- p4 +
             scale_x_continuous(n.breaks = x_axis_breaks) +
@@ -100,7 +101,8 @@ stacked_plot <- function(df, variable, fill_vars, facet_vars=NULL, facet_wrap=FA
           p1 +
             geom_bar(aes(fill = forcats::fct_rev(forcats::fct_infreq(index_fill))), width=bar_width,
                      position="fill", stat="count", show.legend = TRUE) +
-            guides(fill=guide_legend(nrow = nrow_legend)) } else {
+            guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend)) 
+          } else {
               p1 +
                 geom_bar(aes(fill = forcats::fct_rev(forcats::fct_infreq(index_fill))), width=bar_width,
                          position="fill", stat="count", show.legend = FALSE)
@@ -123,18 +125,17 @@ stacked_plot <- function(df, variable, fill_vars, facet_vars=NULL, facet_wrap=FA
             p5 +
               geom_boxplot(aes(colour = index_fill), outlier.colour = "black", 
                            outlier.shape = 1, show.legend = TRUE) +
-              guides(colour=guide_legend(nrow = nrow_legend)) } 
+              guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend)) } 
           else {
             p5 +
               geom_boxplot(aes(colour = index_fill), outlier.colour = "black", 
                            outlier.shape = 1, show.legend = FALSE)
-          }
-          
-        } else {
+            }
+          } else {
           ggplot(data=df, aes(x = as.numeric(index))) + 
             geom_density(fill = index_fill, alpha=0.4, show.legend = TRUE) +
-            guides(fill=guide_legend(nrow = nrow_legend))
-        }
+            guides(fill=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
+            }
         p7 <- p4 +
           scale_x_continuous(n.breaks = x_axis_breaks) +
           scale_y_continuous(n.breaks = y_axis_breaks)
@@ -159,7 +160,7 @@ stacked_plot <- function(df, variable, fill_vars, facet_vars=NULL, facet_wrap=FA
 
 ### Line graphs
 line_count_plot <- function(df, x_vars, x_label=NULL, y_label=NULL, colour_vars, facet_vars=NULL, facet_wrap=FALSE,
-                            facet_ncol = 4, title_label = TRUE, legend=TRUE, nrow_legend = 1, y_axis_breaks =10,
+                            facet_ncol = 4, title_label = TRUE, legend=TRUE, nrow_legend = 1, ncol_legend = NULL, y_axis_breaks =10,
                             x_axis_date_breaks = "1 month", x_axis_limits = c(NULL, NULL), facet_scales = "free_y",
                             y_axis_limits = c(NULL, NULL), line_width = 0.5, expand_xaxis = c(0.02,0.02),
                             expand_yaxis = c(0.02,0.05), title_label_wrap_width = 35, x_axis_date_label = "%Y-%m",
@@ -183,7 +184,7 @@ line_count_plot <- function(df, x_vars, x_label=NULL, y_label=NULL, colour_vars,
         p +
           geom_line(aes(colour=index_colour, group=index_colour), linewidth = line_width,
                     stat="count", show.legend = TRUE) +
-          guides(colour=guide_legend(nrow = nrow_legend))
+          guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
       } else { 
         p +
           geom_line(aes(colour=index_colour, group=index_colour), linewidth = line_width,
@@ -234,7 +235,7 @@ line_count_plot <- function(df, x_vars, x_label=NULL, y_label=NULL, colour_vars,
         p +
           geom_line(aes(colour=index_colour, group=index_colour), linewidth = line_width,
                     stat="count", show.legend = TRUE) +
-          guides(colour=guide_legend(nrow = nrow_legend))
+          guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
       } else { 
         p +
           geom_line(aes(colour=index_colour, group=index_colour), linewidth = line_width,
@@ -291,7 +292,7 @@ line_count_plot <- function(df, x_vars, x_label=NULL, y_label=NULL, colour_vars,
 }
 
 line_sum_plot <- function(df, x_vars, y_vars, x_label=NULL, y_label=NULL, colour_vars, facet_vars=NULL, 
-                          stat_fun_sum = TRUE, title_label = TRUE, facet_wrap=FALSE, legend=TRUE, nrow_legend = 1,
+                          stat_fun_sum = TRUE, title_label = TRUE, facet_wrap=FALSE, legend=TRUE, nrow_legend = 1, ncol_legend = NULL,
                           facet_ncol = 4, y_axis_breaks =10, x_axis_date_breaks = "1 month", x_axis_limits = c(NULL, NULL),
                           y_axis_label_percent = FALSE, y_axis_limits = c(NULL, NULL), facet_scales = "free_y",
                           line_width = 0.5, title_label_wrap_width = 35, expand_xaxis = c(0.02,0.02), 
@@ -317,7 +318,7 @@ line_sum_plot <- function(df, x_vars, y_vars, x_label=NULL, y_label=NULL, colour
         p + 
           geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "sum",
                     linewidth = line_width, show.legend = TRUE) +
-            guides(colour=guide_legend(nrow = nrow_legend))
+            guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
         } else {
           p + 
             geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "sum",
@@ -328,7 +329,7 @@ line_sum_plot <- function(df, x_vars, y_vars, x_label=NULL, y_label=NULL, colour
           p + 
             geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "mean",
                       linewidth = line_width, show.legend = TRUE) +
-            guides(colour=guide_legend(nrow = nrow_legend))
+            guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
         } else {
           p + 
             geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "mean",
@@ -382,7 +383,7 @@ line_sum_plot <- function(df, x_vars, y_vars, x_label=NULL, y_label=NULL, colour
           p + 
             geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "sum",
                       linewidth = line_width, show.legend = TRUE) +
-            guides(colour=guide_legend(nrow = nrow_legend))
+            guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
         } else {
           p + 
             geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "sum",
@@ -393,7 +394,7 @@ line_sum_plot <- function(df, x_vars, y_vars, x_label=NULL, y_label=NULL, colour
           p + 
             geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "mean",
                       linewidth = line_width, show.legend = TRUE) +
-            guides(colour=guide_legend(nrow = nrow_legend))
+            guides(colour=guide_legend(nrow = nrow_legend, ncol = ncol_legend))
         } else {
           p + 
             geom_line(aes(color=index_colour, group=index_colour), stat = "summary", fun = "mean",
