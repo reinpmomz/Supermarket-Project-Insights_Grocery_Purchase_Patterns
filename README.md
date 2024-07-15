@@ -32,7 +32,20 @@ The data used for analysis is available on reasonable request from the [**Study 
 
 - Food items categorized into 103 food categories which were further classified into 4 groups according to the Nova food classification.
 
- 
+## Tools/Materials
+
+1. Nova food classification guides are in the _data_ sub-folder of this repository.
+
+2. The `supermarket_a_recode_file.xlsx` file contains 
+
+* MetaData about supermarkets in the _branches_ sheet.
+
+* Guide on search terms that were used to convert the quantities to standard unit of measures in _uom_ sheet.
+
+* Guide to how food items were categorized in the _unique_items_ sheet.
+
+* Data dictionary of the data _rename_vars_ sheet.
+
 ## Run
 
 After cloning the repository or downloading the ZIP, you also need the data files (**Data used for analysis**) in the _data_ sub-folder of _Supermarket-Project-Insights_Grocery_Purchase_Patterns_ folder.
