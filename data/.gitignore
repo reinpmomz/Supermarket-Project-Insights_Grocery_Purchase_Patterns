@@ -3,4 +3,4 @@
 # Except this .gitignore file and pdf file
 !.gitignore
 
-!.pdf
+!*.pdf
