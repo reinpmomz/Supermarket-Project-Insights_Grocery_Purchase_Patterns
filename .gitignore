@@ -10,5 +10,8 @@
 # sav files
 *.sav
 
-# sav files
+# dta files
 *.dta
+
+# csv files
+*.csv
