@@ -184,7 +184,10 @@ single_plot <- function(df, variable, rotate_axis=FALSE, percent_yaxis=FALSE, ti
     } else {
       if (histogram == TRUE) {
       ggplot(data=df, aes(x = as.numeric(index))) + 
-        geom_histogram(bins = histogram_bins, color = "black", fill = "gray") +
+        geom_histogram(aes(y = after_stat(density)), 
+                       bins = histogram_bins, color = "black", fill = "gray") +
+        geom_density(linewidth = 0.5, colour = "royalblue",
+                       fill = "royalblue", alpha = 0.25) +  
         geom_vline(aes(xintercept = mean(index, na.rm=TRUE)), 
                    linetype = "dashed", linewidth = 0.6) +
         scale_x_continuous(n.breaks = x_axis_breaks_histogram) +
