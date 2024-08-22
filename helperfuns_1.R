@@ -43,7 +43,8 @@ gtsummary_compact_theme <- gtsummary::theme_gtsummary_compact()
 ## descriptive summary tables
 descriptive_table <- 
   function(df, foot_note = "", caption = "", ci=FALSE, include, mean_vars = NULL, sum_vars = NULL,
-           flex_table = TRUE, categorical_proportion_digits = 1, statistic_categorical = "{n} ({p}%)") {
+           flex_table = TRUE, categorical_proportion_digits = 1, continous_digits = 1,
+           statistic_categorical = "{n} ({p}%)") {
     df <- (df %>%
              mutate(across(where(is.character), sjlabelled::as_factor))
            )
@@ -61,7 +62,7 @@ descriptive_table <-
                                "{min}, {max}" ),
                                all_categorical() ~ statistic_categorical
                                )
-                             , digits = list(all_continuous(continuous2 = TRUE) ~ 1, 
+                             , digits = list(all_continuous(continuous2 = TRUE) ~ continous_digits, 
                                              all_categorical() ~ c(0, categorical_proportion_digits)
                              )
                              , percent = "column" #"column", "row", or "cell"
@@ -85,8 +86,8 @@ descriptive_table <-
                                  "{min}, {max}" ),
                                all_categorical() ~ statistic_categorical
                                )
-                             , digits = list(any_of(sum_vars) ~ 1, 
-                                             all_continuous2() ~ 1, 
+                             , digits = list(any_of(sum_vars) ~ continous_digits, 
+                                             all_continuous2() ~ continous_digits, 
                                              all_categorical() ~ c(0, categorical_proportion_digits)
                              )
                              , percent = "column" #"column", "row", or "cell"
@@ -136,7 +137,7 @@ descriptive_table <-
 inferential_table <- 
   function(df, foot_note = "", caption = "", by_vars , percent = "column", include , ci=FALSE, 
            mean_vars = NULL, sum_vars = NULL, overall = FALSE, p_value = TRUE, flex_table = TRUE,
-           categorical_proportion_digits = 1, statistic_categorical = "{n} ({p}%)") {
+           categorical_proportion_digits = 1, continous_digits = 1, statistic_categorical = "{n} ({p}%)") {
     out <- lapply(by_vars, function(x){
       df <- (df %>%
                mutate(across(where(is.character), sjlabelled::as_factor))
@@ -167,7 +168,7 @@ inferential_table <-
                                  "{min}, {max}" ),
                                  all_categorical() ~ statistic_categorical
                                  )
-                               , digits = list(all_continuous(continuous2 = TRUE) ~ 1,
+                               , digits = list(all_continuous(continuous2 = TRUE) ~ continous_digits,
                                                all_categorical() ~ c(0, categorical_proportion_digits))
                                , percent = percent #"column", "row", or "cell"
                                , missing = "ifany" #list missing data separately #ifany #no #always
@@ -190,8 +191,8 @@ inferential_table <-
                                                     "{min}, {max}" ),
                                                   all_categorical() ~ statistic_categorical
                                                   )
-                               , digits = list(any_of(sum_vars) ~ 1, 
-                                               all_continuous2() ~ 1, 
+                               , digits = list(any_of(sum_vars) ~ continous_digits, 
+                                               all_continuous2() ~ continous_digits, 
                                                all_categorical() ~ c(0, categorical_proportion_digits)
                                )
                                , percent = percent #"column", "row", or "cell"
@@ -263,7 +264,7 @@ inferential_table <-
 inferential_strata_table <- 
   function(df, foot_note = "", caption = "", strata_vars, by_vars, percent = "column", include, ci=FALSE,
            p_value = TRUE, mean_vars = NULL, sum_vars = NULL, flex_table = TRUE, categorical_proportion_digits = 1,
-           statistic_categorical = "{n} ({p}%)") {
+           continous_digits = 1, statistic_categorical = "{n} ({p}%)") {
     out <- lapply( by_vars, function(y){
       df <- (df %>%
                mutate(across(where(is.character), sjlabelled::as_factor))
@@ -303,7 +304,7 @@ inferential_strata_table <-
                                                     "{min}, {max}" ),
                                                     all_categorical() ~ statistic_categorical
                                                     )
-                                                  , digits = list(all_continuous(continuous2 = TRUE) ~ 1,
+                                                  , digits = list(all_continuous(continuous2 = TRUE) ~ continous_digits,
                                                                   all_categorical() ~ c(0, categorical_proportion_digits)
                                                   )
                                                   , percent = percent #"column", "row", or "cell"
@@ -356,7 +357,7 @@ inferential_strata_table <-
                                                     "{min}, {max}" ),
                                                     all_categorical() ~ statistic_categorical
                                                   )
-                                                  , digits = list(all_continuous(continuous2 = TRUE) ~ 1,
+                                                  , digits = list(all_continuous(continuous2 = TRUE) ~ continous_digits,
                                                                   all_categorical() ~ c(0, categorical_proportion_digits)
                                                   )
                                                   , percent = percent #"column", "row", or "cell"
@@ -408,7 +409,7 @@ inferential_strata_table <-
                                                   "{min}, {max}" ),
                                                   all_categorical() ~ statistic_categorical
                                                 )
-                                                , digits = list(all_continuous(continuous2 = TRUE) ~ 1,
+                                                , digits = list(all_continuous(continuous2 = TRUE) ~ continous_digits,
                                                                 all_categorical() ~ c(0, categorical_proportion_digits)
                                                 )
                                                 , percent = percent #"column", "row", or "cell"
@@ -451,7 +452,7 @@ inferential_strata_table <-
                                                     "{min}, {max}" ),
                                                     all_categorical() ~ statistic_categorical
                                                   )
-                                                  , digits = list(all_continuous(continuous2 = TRUE) ~ 1,
+                                                  , digits = list(all_continuous(continuous2 = TRUE) ~ continous_digits,
                                                                   all_categorical() ~ c(0, categorical_proportion_digits)
                                                   )
                                                   , percent = percent #"column", "row", or "cell"
@@ -498,8 +499,8 @@ inferential_strata_table <-
                                                                          "{min}, {max}" ),
                                                                        all_categorical() ~ statistic_categorical
                                                                        )
-                                                    , digits = list(any_of(sum_vars) ~ 1,
-                                                                    all_continuous2() ~ 1,
+                                                    , digits = list(any_of(sum_vars) ~ continous_digits,
+                                                                    all_continuous2() ~ continous_digits,
                                                                     all_categorical() ~ c(0, categorical_proportion_digits))
                                                     , percent = percent #"column", "row", or "cell"
                                                     , missing = "ifany" #list missing data separately #ifany #no #always
@@ -553,8 +554,8 @@ inferential_strata_table <-
                                                                          "{min}, {max}" ),
                                                                        all_categorical() ~ statistic_categorical
                                                                        )
-                                                    , digits = list(any_of(sum_vars) ~ 1,
-                                                                    all_continuous2() ~ 1,
+                                                    , digits = list(any_of(sum_vars) ~ continous_digits,
+                                                                    all_continuous2() ~ continous_digits,
                                                                     all_categorical() ~ c(0, categorical_proportion_digits))
                                                     , percent = percent #"column", "row", or "cell"
                                                     , missing = "ifany" #list missing data separately #ifany #no #always
@@ -607,8 +608,8 @@ inferential_strata_table <-
                                                                        "{min}, {max}" ),
                                                                      all_categorical() ~ statistic_categorical
                                                                      )
-                                                  , digits = list(any_of(sum_vars) ~ 1,
-                                                                  all_continuous2() ~ 1,
+                                                  , digits = list(any_of(sum_vars) ~ continous_digits,
+                                                                  all_continuous2() ~ continous_digits,
                                                                   all_categorical() ~ c(0, categorical_proportion_digits))
                                                   , percent = percent #"column", "row", or "cell"
                                                   , missing = "ifany" #list missing data separately #ifany #no #always
@@ -652,8 +653,8 @@ inferential_strata_table <-
                                                                          "{min}, {max}" ),
                                                                        all_categorical() ~ statistic_categorical
                                                                        )
-                                                    , digits = list(any_of(sum_vars) ~ 1,
-                                                                    all_continuous2() ~ 1,
+                                                    , digits = list(any_of(sum_vars) ~ continous_digits,
+                                                                    all_continuous2() ~ continous_digits,
                                                                     all_categorical() ~ c(0, categorical_proportion_digits))
                                                     , percent = percent #"column", "row", or "cell"
                                                     , missing = "ifany" #list missing data separately #ifany #no #always

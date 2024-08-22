@@ -9,7 +9,7 @@ working_directory
 ### continous summary tables
 continous_table <- 
   function(df, foot_note = "", caption = "", continous_vars, sum=FALSE, display_mean = FALSE, p_value = FALSE,
-           include, flex_table = TRUE) {
+           continous_digits = 1, include, flex_table = TRUE) {
   df <- (df %>%
            mutate(across(where(is.character), sjlabelled::as_factor))
          )
@@ -21,7 +21,7 @@ continous_table <-
                               ,include = any_of(include)
                               ,statistic = everything() ~ c(
                                 "{mean} ({sd})")
-                              ,digits = list(everything() ~ c(1, 1)
+                              ,digits = list(everything() ~ continous_digits
                                              )
                               ) 
     } else {
@@ -30,7 +30,7 @@ continous_table <-
                                 ,include = any_of(include)
                                 ,statistic = everything() ~ c(
                                   "{mean} ({sd}) / {median} ({p25}, {p75})")
-                                ,digits = list(everything() ~ c(1, 1, 0, 0, 0)
+                                ,digits = list(everything() ~ continous_digits
                                                )
                                 )
     }
@@ -42,7 +42,7 @@ continous_table <-
                                 , include = any_of(include)
                                 , statistic = everything() ~ c(
                                   "{sum} / {mean} ({sd})")
-                                , digits = list(everything() ~ c(1, 1, 1)
+                                , digits = list(everything() ~ continous_digits
                                                 )
                                 )
     } else {
@@ -51,7 +51,7 @@ continous_table <-
                                 , include = any_of(include)
                                 , statistic = everything() ~ c(
                                   "{sum}")
-                                , digits = list(everything() ~ 1
+                                , digits = list(everything() ~ continous_digits
                                                 )
                                 )
     }
@@ -89,7 +89,7 @@ continous_table <-
 ### continous by summary tables
 continous_by_table <- 
   function(df, foot_note = "", caption = "", continous_vars, by_vars, sum=FALSE, display_mean = FALSE,
-           p_value = FALSE, include, flex_table = TRUE) {
+           p_value = FALSE, continous_digits = 1, include, flex_table = TRUE) {
     df <- (df %>%
              mutate(across(where(is.character), sjlabelled::as_factor))
            )
@@ -103,7 +103,7 @@ continous_by_table <-
                                     ,include = any_of(include)
                                     ,statistic = everything() ~ c(
                                       "{mean} ({sd})")
-                                    ,digits = list(everything() ~ c(1, 1)
+                                    ,digits = list(everything() ~ continous_digits
                                                    )
                                     ) 
           } else {
@@ -113,7 +113,7 @@ continous_by_table <-
                                     ,include = any_of(include)
                                     ,statistic = everything() ~ c(
                                       "{mean} ({sd}) / {median} ({p25}, {p75})")
-                                    ,digits = list(everything() ~ c(1, 1, 0, 0, 0)
+                                    ,digits = list(everything() ~ continous_digits
                                                    )
                                     )
             }
@@ -126,7 +126,7 @@ continous_by_table <-
                                     , include = any_of(include)
                                     , statistic = everything() ~ c(
                                       "{sum} / {mean} ({sd})")
-                                    , digits = list(everything() ~ c(1, 1, 1)
+                                    , digits = list(everything() ~ continous_digits
                                                     )
                                     )  
           } else {
@@ -136,7 +136,7 @@ continous_by_table <-
                                     , include = any_of(include)
                                     , statistic = everything() ~ c(
                                       "{sum}")
-                                    , digits = list(everything() ~ 1
+                                    , digits = list(everything() ~ continous_digits
                                                     )
                                     ) 
             }
@@ -177,7 +177,7 @@ continous_by_table <-
 ### continous strata summary tables
 continous_strata_table <- 
   function(df, foot_note = "", caption = "", strata_vars, continous_vars, by_vars, display_mean = FALSE,
-           sum=FALSE, p_value = FALSE, include, flex_table = TRUE) {
+           sum=FALSE, p_value = FALSE, continous_digits = 1, include, flex_table = TRUE) {
     df <- (df %>%
              mutate(across(where(is.character), sjlabelled::as_factor))
            )
@@ -195,7 +195,7 @@ continous_strata_table <-
                                   , include = any_of(include)
                                   , statistic = everything() ~ c(
                                     "{mean} ({sd})")
-                                  , digits = list(everything() ~ c(1, 1)
+                                  , digits = list(everything() ~ continous_digits
                                                   )
                                   ) %>% 
                      modify_header(label = "**Variables**" # update the column header
@@ -216,7 +216,7 @@ continous_strata_table <-
                            , include = any_of(include)
                            , statistic = everything() ~ c(
                              "{mean} ({sd}) / {median} ({p25}, {p75})")
-                           , digits = list(everything() ~ c(1, 1, 0, 0, 0)
+                           , digits = list(everything() ~ continous_digits
                            )
                          ) %>% 
                          modify_header(label = "**Variables**" # update the column header
@@ -240,7 +240,7 @@ continous_strata_table <-
                              , include = any_of(include)
                              , statistic = everything() ~ c(
                                "{sum} / {mean} ({sd})")
-                             , digits = list(everything() ~ c(1, 1, 1)
+                             , digits = list(everything() ~ continous_digits
                              )
                            ) %>% 
                            modify_header(label = "**Variables**"# update the column header
@@ -261,7 +261,7 @@ continous_strata_table <-
                              , include = any_of(include)
                              , statistic = everything() ~ c(
                                "{sum}")
-                             , digits = list(everything() ~ 1
+                             , digits = list(everything() ~ continous_digits
                              )
                            ) %>% 
                            modify_header(label = "**Variables**"# update the column header
@@ -288,7 +288,7 @@ continous_strata_table <-
                            , include = any_of(include)
                            , statistic = everything() ~ c(
                              "{mean} ({sd})")
-                           , digits = list(everything() ~ c(1, 1)
+                           , digits = list(everything() ~ continous_digits
                            )
                          ) %>%  
                          modify_header(label = "**Variables**" # update the column header
@@ -311,7 +311,7 @@ continous_strata_table <-
                            , include = any_of(include)
                            , statistic = everything() ~ c(
                              "{mean} ({sd}) / {median} ({p25}, {p75})")
-                           , digits = list(everything() ~ c(1, 1, 0, 0, 0)
+                           , digits = list(everything() ~ continous_digits
                            )
                          ) %>%  
                          modify_header(label = "**Variables**" # update the column header
@@ -338,7 +338,7 @@ continous_strata_table <-
                            , include = any_of(include)
                            , statistic = everything() ~ c(
                              "{sum} / {mean} ({sd})")
-                           , digits = list(everything() ~ c(1, 1, 1)
+                           , digits = list(everything() ~ continous_digits
                            )
                          ) %>% 
                          modify_header(label = "**Variables**" # update the column header
@@ -361,7 +361,7 @@ continous_strata_table <-
                              , include = any_of(include)
                              , statistic = everything() ~ c(
                                "{sum}")
-                             , digits = list(everything() ~ 1
+                             , digits = list(everything() ~ continous_digits
                              )
                            ) %>% 
                            modify_header(label = "**Variables**" # update the column header
