@@ -114,7 +114,7 @@ descriptive_table <-
       ) %>% 
       bold_labels() %>%
       italicize_levels() %>% 
-      add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+      add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
              # add column with total number of non-missing observations 
       ) %>% 
       modify_footnote(all_stat_cols() ~ foot_note) %>%
@@ -236,7 +236,7 @@ inferential_table <-
         ) %>% 
         bold_labels() %>%
         italicize_levels() %>%
-        add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+        add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                # add column with total number of non-missing observations
         ) %>% 
         modify_spanning_header(paste0("stat_", seq(levels_by)) ~ paste0("**", label_by, "**")
@@ -316,7 +316,7 @@ inferential_strata_table <-
                          ) %>%
                          bold_labels() %>%
                          italicize_levels() %>%
-                         add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                         add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                                 # add column with total number of non-missing observations
                          ) %>%
                          add_ci(method = list(all_categorical() ~ "wilson", all_continuous() ~ "t.test"),
@@ -369,7 +369,7 @@ inferential_strata_table <-
                          ) %>%
                          bold_labels() %>%
                          italicize_levels() %>%
-                         add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                         add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                                 # add column with total number of non-missing observations
                          ) %>%
                          add_ci(method = list(all_categorical() ~ "wilson", all_continuous() ~ "t.test"),
@@ -421,7 +421,7 @@ inferential_strata_table <-
                        ) %>%
                        bold_labels() %>%
                        italicize_levels() %>%
-                       add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                       add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                               # add column with total number of non-missing observations
                        ) %>% 
                        add_p(pvalue_fun = ~style_pvalue(.x, digits = 3),
@@ -464,7 +464,7 @@ inferential_strata_table <-
                          ) %>%
                          bold_labels() %>%
                          italicize_levels() %>%
-                         add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                         add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                                 # add column with total number of non-missing observations
                          ) %>% 
                          modify_spanning_header(paste0("stat_", seq(levels_by)) ~ paste0("**", label_by, "**")
@@ -511,7 +511,7 @@ inferential_strata_table <-
                            ) %>%
                            bold_labels() %>%
                            italicize_levels() %>%
-                           add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                           add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                                   # add column with total number of non-missing observations
                            ) %>%
                            add_ci(method = list(all_categorical() ~ "wilson", all_continuous() ~ "t.test"),
@@ -566,7 +566,7 @@ inferential_strata_table <-
                            ) %>%
                            bold_labels() %>%
                            italicize_levels() %>%
-                           add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                           add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                                   # add column with total number of non-missing observations
                            ) %>%
                            add_ci(method = list(all_categorical() ~ "wilson", all_continuous() ~ "t.test"),
@@ -620,7 +620,7 @@ inferential_strata_table <-
                          ) %>%
                          bold_labels() %>%
                          italicize_levels() %>%
-                         add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                         add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                                 # add column with total number of non-missing observations
                          ) %>%
                          add_p(pvalue_fun = ~style_pvalue(.x, digits = 3),
@@ -665,7 +665,7 @@ inferential_strata_table <-
                            ) %>%
                            bold_labels() %>%
                            italicize_levels() %>%
-                           add_n( statistic = "{n}", col_label = "**n**", last = FALSE, footnote = FALSE
+                           add_n( statistic = "{N_nonmiss}", col_label = "**n**", last = FALSE, footnote = FALSE
                                   # add column with total number of non-missing observations
                            ) %>% 
                            modify_spanning_header(paste0("stat_", seq(levels_by)) ~ paste0("**", label_by, "**")

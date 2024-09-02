@@ -59,6 +59,57 @@ ggtheme_rank_plot <- function() {
   )
 }
 
+ggtheme_sf_plot <- function(){
+  theme_set(#theme_minimal() +
+    theme(
+      rect = element_blank(),
+      #plot.background = element_blank(),
+      #panel.background = element_rect(fill = "white"),
+      #legend.position="bottom",
+      #legend.text = element_text(size = 8),
+      #legend.title = element_text(size = 8, color = "red", face = "bold", hjust = 0.5),
+      #axis.line.y = element_line(colour = "grey",inherit.blank = FALSE),
+      #axis.line.x = element_line(colour = "grey",inherit.blank = FALSE),
+      axis.ticks.y = element_blank(),
+      axis.ticks.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.text.x = element_blank(),
+      plot.title = element_text(hjust = 0.5, face = "bold", size = 10),
+      plot.caption = element_text(angle = 0, size = 10, face = "italic"),
+      axis.title.x = element_text(size = 10, face = "bold"),
+      axis.title.y = element_text(size = 10, face = "bold"),
+      panel.grid.major.y = element_blank(),
+      panel.grid.major.x = element_blank(),
+      panel.grid.minor.x = element_blank(),
+      panel.grid.minor.y = element_blank(),
+    )
+  )
+}
+
+ggtheme_heat_plot = function(angletext_yaxis=0, angletext_xaxis=0) {
+  theme_set(theme_bw(base_size = 10)
+            + theme(panel.grid = element_blank()
+                    , plot.title = element_text(hjust = 0.5, face = "bold", size = 10)
+                    , axis.title.x = element_blank()
+                    , axis.title.y = element_blank()
+                    , axis.text.y = element_text(size = 8.5, angle = angletext_yaxis, lineheight = 0.7)
+                    , axis.text.x = element_text(size = 8.5, angle = angletext_xaxis, lineheight = 0.7)
+            )
+  )
+}
+
+ggtheme_regression_plot = function(angletext_yaxis=0, angletext_xaxis=0) {
+  theme_set(theme_bw(base_size = 10)
+            + theme(panel.grid = element_blank()
+                    , plot.title = element_text(hjust = 0.5, face = "bold", size = 10)
+                    , axis.title.x = element_text(size = 10, face = "bold")
+                    , axis.title.y = element_text(size = 10, face = "bold")
+                    , axis.text.y = element_text(size = 8.5, angle = angletext_yaxis, lineheight = 0.7)
+                    , axis.text.x = element_text(size = 8.5, angle = angletext_xaxis, lineheight = 0.7)
+            )
+  )
+}
+
 ### simple Bar graphs and histograms without density plots
 single_plot <- function(df, variable, rotate_axis=FALSE, percent_yaxis=FALSE, title_label = TRUE, text_label = TRUE,
                         histogram = TRUE, text_label_size = 2.5, y_axis_breaks =10, x_axis_breaks_histogram = 10,
