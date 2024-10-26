@@ -1,4 +1,6 @@
 ######################################################################
+### Restart R
+#.rs.restartR()
 
 ### Start with a clean environment by removing objects in workspace
 rm(list=ls())
@@ -53,6 +55,12 @@ source("load_data_local.R")
 
 ### Data cleaning
 source("cleaning.R")
+
+### Create tables in database schema in Postgres
+#source("create_tables_local_database.R")
+
+### insert raw data in created tables
+#source("insert_data_tables_local_database.R")
 
 ### Select variables for analysis
 source("analysis_data.R")
@@ -131,6 +139,7 @@ source("basket_analysis_data.R")
 source("basket_classname_thresholds.R")
 
 source("basket_classname_overall.R")
+source("basket_classname_overall_frequent_items.R")
 source("basket_classname_gender.R")
 source("basket_classname_age.R")
 source("basket_classname_year.R")
@@ -147,10 +156,15 @@ source("basket_classname_year_county.R")
 ### Saving class name Market Basket Analysis output
 source("save_classname_basket_output.R")
 
-### Visualize class name Rules - Heat maps
-source("rules_classname_heatmap.R")
-source("rules_socio_by_classname_heatmap.R")
-source("rules_year_by_classname_heatmap.R")
+### Visualize class name LHS Rules - Heat maps
+source("lhs_rules_classname_heatmap.R")
+source("lhs_rules_socio_by_classname_heatmap.R")
+source("lhs_rules_year_by_classname_heatmap.R")
+
+### Visualize class name RHS Rules - Heat maps
+source("rhs_rules_classname_heatmap.R")
+source("rhs_rules_socio_by_classname_heatmap.R")
+source("rhs_rules_year_by_classname_heatmap.R")
 
 ######################################################################
 ## Save workspace at the end without working directory path

@@ -67,7 +67,7 @@ f -> fside [minlen=7 dir=back, style = dashed];
 [10]: paste0('Transactions Alignment','\\n','Demographics Alignment' )
 [11]: paste0('Data Consistency Checks','\\n','Quallity Assurance Checks','\\n','Remove Non-Food Items','\\n','Filter Non-Loyalty Shoppers')
 [12]: paste0('Descriptive and Inferential Analysis','\\n', '(Descriptives for Socio-Demographic','\\n', 'Transactions and Nova Classification;','\\n', 'Chi-square association between','\\n', 'Socio-Demographics and Nova Groups)')
-[13]: paste0('Apriori Algorithm','\\n', 'Minimum Support = 0.005','\\n', 'Confidence = 0.5')
+[13]: paste0('Apriori Algorithm','\\n', 'Minimum Support = 0.01','\\n', 'Confidence = 0.1')
 [14]: paste0('\\n','Association Rules and Nova Classification','\\n', 'Alignment' )
 
 

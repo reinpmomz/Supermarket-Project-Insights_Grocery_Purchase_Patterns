@@ -1,6 +1,7 @@
 library(dplyr)
 library(ggplot2)
 library(ggpubr)
+library(ggstats)
 
 working_directory
 
@@ -32,14 +33,14 @@ customer_stack_plot <- sapply(c("gender", "mean_agegroup","county_name"), functi
     stacked_plot(df = df_new, 
                  variable = c("gender", "mean_agegroup", "county_name")[!(c("gender", "mean_agegroup", "county_name") %in% x)],
                  fill_vars = x,
-                 title_label = TRUE,
+                 title_label = NULL,
                  nrow_legend = 5
                  )
     } else {
   stacked_plot(df = df_new, 
                variable = c("gender", "mean_agegroup", "county_name")[!(c("gender", "mean_agegroup", "county_name") %in% x)],
                fill_vars = x,
-               title_label = TRUE,
+               title_label = NULL,
                nrow_legend = 2
                )
     }

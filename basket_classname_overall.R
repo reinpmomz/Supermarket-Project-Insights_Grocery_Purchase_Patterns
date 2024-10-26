@@ -33,6 +33,11 @@ overall_classname_rules <- sapply(
                              )
     
     out <-sort(rules, by="confidence", decreasing=TRUE)
+    
+    other_measures <- arules::interestMeasure(out) %>%
+      dplyr::select(-c(support, confidence, lift, count, coverage) #included in quality dataframe
+                    )
+    
     df <- data.frame( number_transactions = summary(out)@info$ntransactions,
                       set_support = summary(out)@info$support,
                       set_confidence = summary(out)@info$confidence,
@@ -50,7 +55,8 @@ overall_classname_rules <- sapply(
                       summary_size_rhs = as.character(list(summary(rhs(out))@lengthSummary)),
                       lhs = labels(lhs(out)),
                       rhs = labels(rhs(out)),
-                      out@quality
+                      out@quality,
+                      other_measures
                       )
     
     df$level <- nn
@@ -63,5 +69,4 @@ overall_classname_rules <- sapply(
 
 df_overall_classname_rules <- do.call("rbind", overall_classname_rules) %>%
   dplyr::mutate(across(where(is.numeric), ~round(.x, 5)))
-
 

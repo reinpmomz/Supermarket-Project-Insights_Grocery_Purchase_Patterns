@@ -26,7 +26,9 @@ base::ifelse(!base::dir.exists(output_prop_plots_Dir), base::dir.create(output_p
 ### Install CRAN packages
 required_packages <- c("tidyverse", "readxl", "writexl", "janitor", "knitr", "kableExtra", "officer", "rstatix",
                        "lubridate", "gtsummary", "flextable", "labelled", "sjlabelled", "tibble", "scales",
-                       "ggpubr", "rlang", "arules", "arulesViz", "haven", "DiagrammeR", "DiagrammeRsvg", "rsvg")
+                       "ggpubr", "rlang", "arules", "arulesViz", "haven", "DiagrammeR", "DiagrammeRsvg", "rsvg",
+                       "ggstats"
+                       )
 
 installed_packages <- required_packages %in% base::rownames(utils::installed.packages())
 

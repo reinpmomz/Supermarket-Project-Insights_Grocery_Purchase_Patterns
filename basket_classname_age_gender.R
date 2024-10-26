@@ -35,6 +35,11 @@ age_gender_classname_rules <- sapply(
                                )
       
       out <-sort(rules, by="confidence", decreasing=TRUE)
+      
+      other_measures <- arules::interestMeasure(out) %>%
+        dplyr::select(-c(support, confidence, lift, count, coverage) #included in quality dataframe
+                      )
+      
       df <- data.frame( number_transactions = summary(out)@info$ntransactions,
                         set_support = summary(out)@info$support,
                         set_confidence = summary(out)@info$confidence,
@@ -52,8 +57,10 @@ age_gender_classname_rules <- sapply(
                         summary_size_rhs = as.character(list(summary(rhs(out))@lengthSummary)),
                         lhs = labels(lhs(out)),
                         rhs = labels(rhs(out)),
-                        out@quality
-      )
+                        out@quality,
+                        other_measures
+                        )
+      
       df$age_group <- nn
       df$gender <- y
       df$pos_confidence <- seq(nrow(df))
