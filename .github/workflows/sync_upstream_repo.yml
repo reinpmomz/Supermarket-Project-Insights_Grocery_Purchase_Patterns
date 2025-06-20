@@ -16,7 +16,7 @@ jobs:
         uses: dabreadman/sync-upstream-repo@v1.3.0
         with:
           # URL of gitHub public upstream repo
-          upstream_repo: https://github.com/APHRC-DSE/Supermarket-Project-Insights_Grocery_Purchase_Patterns
+          upstream_repo: https://github.com/APHRC-DSE/Supermarket-Project-Insights_Grocery_Purchase_Patterns.git
           # Branch to merge from upstream (defaults to downstream branch)
           upstream_branch: "main"
           # Branch to merge into downstream
@@ -24,13 +24,13 @@ jobs:
           # GitHub Bot token
           token: ${{secrets.GITHUB_TOKEN}}
           # Git fetch arguments
-          #fetch_args: 
+          fetch_args: "" 
           # Git merge arguments
-          #merge_args: 
+          merge_args: "" 
           # Git push arguments
-          #push_args:  
+          push_args: ""  
           # Toggle to spawn `sync-upstream-repo` with time logs
-          spawn_logs: true
+          spawn_logs: "true"
           
           
         
