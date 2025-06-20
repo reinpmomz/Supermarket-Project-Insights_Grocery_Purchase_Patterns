@@ -18,17 +18,17 @@ jobs:
           # URL of gitHub public upstream repo
           upstream_repo: https://github.com/APHRC-DSE/Supermarket-Project-Insights_Grocery_Purchase_Patterns
           # Branch to merge from upstream (defaults to downstream branch)
-          upstream_branch: "main"
+          upstream_branch: ${{ env.UPSTREAM_BRANCH }}
           # Branch to merge into downstream
-          downstream_branch: "main"
+          downstream_branch: ${{ env.DOWNSTREAM_BRANCH }}
           # GitHub Bot token
           token: ${{secrets.GITHUB_TOKEN}}
           # Git fetch arguments
-          #fetch_args: # optional, default is 
+          fetch_args: ${{ env.FETCH_ARGS }}
           # Git merge arguments
-          #merge_args: # optional, default is 
+          merge_args: ${{ env.MERGE_ARGS }}
           # Git push arguments
-          #push_args: # optional, default is 
+          push_args: ${{ env.PUSH_ARGS }} 
           # Toggle to spawn `sync-upstream-repo` with time logs
           spawn_logs: true
           
