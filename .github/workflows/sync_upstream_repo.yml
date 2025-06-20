@@ -18,9 +18,9 @@ jobs:
           # URL of gitHub public upstream repo
           upstream_repo: https://github.com/APHRC-DSE/Supermarket-Project-Insights_Grocery_Purchase_Patterns
           # Branch to merge from upstream (defaults to downstream branch)
-          upstream_branch: master
+          upstream_branch: "main"
           # Branch to merge into downstream
-          downstream_branch: master 
+          downstream_branch: "main"
           # GitHub Bot token
           token: ${{secrets.GITHUB_TOKEN}}
           # Git fetch arguments
