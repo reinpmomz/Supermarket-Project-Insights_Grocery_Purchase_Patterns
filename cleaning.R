@@ -1,4 +1,5 @@
 library(dplyr)
+library(readr)
 library(lubridate)
 library(janitor)
 library(stringr)
@@ -21,10 +22,31 @@ uom_vars_df <- recode_file[["uom"]] %>%
 uom_words <- regex(paste(c(uom_vars_df$uom_regex), sep = "", collapse = '|'),
                    ignore_case = TRUE)
 
+## Clean food composition df
+nutrient_composition_df <- (nutrient_composition_df %>%
+                              janitor::clean_names() %>%
+                              dplyr::mutate(across(where(is.character) & !c(nutrient_classification_document, food_group,
+                                                                         code, food_name, edible_conversion_factor),
+                                                   ~readr::parse_number(.x)
+                                                   )
+                                            , across(!c(nutrient_classification_document, food_group,
+                                                        code, food_name, edible_conversion_factor),
+                                                     ~if_else(.x == 0, NA, .x)
+                                                     )
+                                            )
+                            )
+
 ## unique items data frame joined with unit of measure data frame
 unique_items_vars_df <- recode_file[["unique_items"]] %>% 
   janitor::clean_names() %>%
-  distinct(description, .keep_all = TRUE) %>%
+  dplyr::distinct(description, .keep_all = TRUE) %>%
+  dplyr::left_join(nutrient_composition_df %>%
+                     dplyr::select(-c(food_group, food_name, edible_conversion_factor)
+                                   ),
+                   by = c("nutrient_classification_document", "code")
+                   ) %>%
+  dplyr::select(-c(nutrient_classification_document, code)
+                ) %>%
   dplyr::mutate(uom_criteria = stringr::str_extract(description, uom_words)
                 ) %>%
   dplyr::left_join(uom_vars_df %>%
