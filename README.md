@@ -18,7 +18,7 @@ We are assuming you have `R Software` and `Rstudio IDE` installed. If not you ca
 
 ## Data
 
-The data used for analysis is available on reasonable request from the [**Study PI - Agnes Kiragga**](mailto:akiragga@aphrc.org?subject=[GitHub]%20Source%20Han%20Sans).
+The data used for analysis is available upon reasonable request from the [**Study PI - Agnes Kiragga**](mailto:akiragga@aphrc.org?subject=[GitHub]%20Source%20Han%20Sans) or from [**APHRC Microdata Portal**](https://microdataportal.aphrc.org/index.php/catalog/231)
 
 - **Data used for analysis:** `clean_supermarket_a.RData`
 
